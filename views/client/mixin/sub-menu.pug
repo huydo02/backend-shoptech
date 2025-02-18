@@ -1,0 +1,14 @@
+
+mixin sub-menu(items, pathProduct)
+    
+    if items && Array.isArray(items) && items.length > 0
+        ul  
+            //- h1 #{items}
+            each item in items
+                li(class="sub-menu")
+                    a(href=`${pathProduct}/${item.slug}`) #{item.title}
+                    if item.child && Array.isArray(item.child) && item.child.length > 0 
+                        +sub-menu(item.child, pathProduct)  
+                        //- +sub-menu(item.child, `${pathProduct}/${item.slug}`)  
+
+                    

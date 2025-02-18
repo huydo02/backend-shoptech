@@ -1,0 +1,42 @@
+mixin table-tree(categories, level = 0)
+    each item in categories
+        - const prefix = Array(level + 1).join(" -- ")
+        tr 
+            td 
+                input(type="checkbox", name="ids", value=item.id)
+            td #{item.index }
+            //- td
+            //-     img(src=item.thumbnail
+            //-     alt=""
+            //-     srcset=""
+            //-     width="100px")
+            td #{prefix}#{item.title}
+            //- td #{item.parent_id}
+            td 
+                input(
+                    type="number",
+                    name="position",
+                    value=item.position,
+                    style="width:60px"
+                    min="1")
+            td 
+                if (item.status == "active")
+                    a(href="javascript:;"
+                        class="badge badge-success"
+                        data-status=item.status
+                        data-id=item.id
+                        button-change-status
+                        ) hoat dong
+                else 
+                    a(href="javascript:;"
+                        class="badge badge-danger"
+                        data-status=item.status
+                        data-id=item.id
+                        button-change-status
+                        ) khong hoat dong  
+            td 
+                a(href=`${prefixAdmin}/list-category/detail/${item.id}` class="btn btn-secondary btn-sm" button-update) chi tiết
+                a(href=`${prefixAdmin}/list-category/edit/${item.id}` class="btn btn-warning btn-sm" button-update) Sửa
+                button(type="button" button-data=item.id class="btn btn-danger btn-sm ml-1" button-delete) xoa
+        if item.child && Array.isArray(item.child) && item.child.length > 0
+                +table-tree(item.child, level + 1)

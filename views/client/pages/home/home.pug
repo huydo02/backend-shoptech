@@ -1,0 +1,14 @@
+extends ../../layouts/default.pug
+block main
+    h1 trang chủ client
+    h1 day la slide
+    .col-9
+        .inner-menu
+            //- h1 #{tree}
+            ul 
+                //- li(class="sub-menu") #{tree.title}
+                +sub-menu(tree, pathProduct)
+
+        //- each item in products 
+        //-     li tên sản phẩm #{item.tittle} 
+        //-         span giá sản phẩm  #{item.price}

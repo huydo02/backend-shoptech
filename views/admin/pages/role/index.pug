@@ -1,0 +1,35 @@
+extend ../../layouts/default.pug
+block main
+    if(role.permissions.includes("roles-view")) 
+        .card.mb-3
+            .card-header danh sach
+                .card-body
+                    .row
+                        .col-8
+                        if(role.permissions.includes("roles-edit"))
+                            .col-4 
+                                a(
+                                    href=`${prefixAdmin}/roles/create`
+                                    class="btn btn-outline-success"
+                                ) + thêm mới
+                    table(class="table table-hover table-sm", checkbox-multiple) 
+                        thead
+                            tr 
+                                //- th 
+                                //-     input(type="checkbox", name="checkall")
+                                th STT 
+                                th nhóm quyền
+                                th mô tả ngắn
+                                th hanh dong
+                        tbody 
+                            if (roles.length > 0)
+                                each item, index in roles
+                                    tr 
+                                        //- td
+                                        td #{index + 1 }
+                                        td #{item.title }
+                                        td #{item.description }
+                                        td 
+                                            a(href=`${prefixAdmin}/roles/detail/${item.id}` class="btn btn-secondary btn-sm" button-update) chi tiết
+                                            a(href=`${prefixAdmin}/roles/edit/${item.id}` class="btn btn-warning btn-sm" button-update) Sửa
+                                            button(type="button" button-data=item.id class="btn btn-danger btn-sm ml-1" button-delete) xoa

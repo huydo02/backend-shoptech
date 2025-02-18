@@ -1,0 +1,35 @@
+include ../mixin/sub-menu.pug
+header.header
+    .container
+        .row.align-items-center     
+            .col-3 
+                .inner-logo 
+                    a(href="/")
+                        img(src=settingGeneral.thumbnail, alt="" style="width:60px; height:60px" )
+            .col-5
+                form(action="/search", method="GET")
+                    div(class="form-group d-flex mb-0")
+                        input(type="text" placeholder="nhập từ khóa" class="form-control" name="keyword" value=keywords)
+                        button(type="submit" class="btn btn-primary") tìm  
+            .col-4
+                .inner-menu
+                    ul(class="d-flex" style="list-style: none;")
+                        li 
+                            a(href="/") Trang chủ
+                        li(class="sub-menu")
+                            -const pathProduct = "/products" 
+                            
+                            a(href=`${pathProduct}/`) san pham
+                                +sub-menu(tree, pathProduct)
+                        li 
+                            a(href="/cart") Gio (#{(miniCart ? miniCart.totalQuantity : 0)})
+                        if(user)
+                            li 
+                                a(href="/auth/info"  style="color: blue") #{user.fullName}
+                                a(href="/auth/logout" style="color: red") Đăng xuất
+                            
+                        else 
+                            li 
+                                a(href="/auth/login") Đăng nhập
+                            li
+                                a(href="/auth/register") Đăng ký

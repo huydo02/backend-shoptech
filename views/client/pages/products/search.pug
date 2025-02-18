@@ -1,0 +1,20 @@
+extends ../../layouts/default.pug
+block main
+    h1 sản phần tìm kiếm
+    div(class="container" style="display:ruby")
+        //- h2 Card Image
+        //- p Image at the top (card-img-top)
+        if(newProduct.length > 0)
+            each item in newProduct
+            
+                div(class="card d-flex" style="width:400px")
+                    img(class="card-img-top" src=item.thumbnail alt="Card image" style="width:100%")
+                    div(class="card-body")
+                        h4(class="card-title") #{item.title}
+                        p(class="card-text") #{item.description}
+                        p(class="card-text text-danger") #{item.priceNew}$
+
+                        a(href=`/products/detail/${item.slug}` class="btn btn-primary") See Profile #{item.title}
+        else 
+            h2 không tìm thấy kết quả  
+        

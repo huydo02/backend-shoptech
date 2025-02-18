@@ -1,0 +1,29 @@
+extend ../../layouts/default.pug
+block main
+        
+    h1 Thêm nhóm quyền 
+    form(
+        action=`${prefixAdmin}/roles/create`,
+        method="post"
+     ) 
+        div(class="form-group")
+            label(for="title") tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+            )
+        div(class="form-group")
+            label(for="desc") mô tả
+            input(
+                type="text"
+                class="form-control"
+                id="desc"
+                name="description"
+            )
+        div(class="form-group")
+                button(
+                    class="btn btn-primary"
+                    type="submit"
+                ) tạo mới

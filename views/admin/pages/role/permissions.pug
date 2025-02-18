@@ -1,0 +1,279 @@
+extend ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    if(role.permissions.includes("roles-permissions-view"))
+        +alert-error(5000)
+        +alert-success(5000)
+        if(role.permissions.includes("roles-permissions-edit"))
+
+            h1(class="mb-4") Phân quyền
+            
+            if(permissions)
+                div(data-permissions=permissions)
+                div(class="text-right")
+                    button(
+                        type="submit"
+                        class="btn btn-primary"
+                        button-submit
+                    ) cập nhật 
+                table(
+                    class="table table-hover table-sm"
+                    table-permissions
+                )
+                    thead
+                        tr 
+                            th tính năng 
+                            each item in permissions
+                                th(class="text-center") #{item.title}
+                            //- th(class="text-center") quản trị viên 
+                    tbody 
+                        
+                        tr(data-name="id")
+                            each item in permissions
+                                td(class="text-center d-none")
+                                    input(type="text" value=item.id)
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b danh mục sản phẩm
+                        tr(data-name="products-category-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="products-category-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="products-category-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="products-category-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox")
+
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b nhóm quyền
+                        tr(data-name="roles-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox")
+                        
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b Danh sách tài khoản
+                        tr(data-name="accounts-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="accounts-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="accounts-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="accounts-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox")
+                        
+                        tr 
+                            td(colspan="4") 
+                                h6 
+                                    b phân quyền
+                        tr(data-name="roles-permissions-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-permissions-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-permissions-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox") 
+                        tr(data-name="roles-permissions-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox")
+
+            form(
+                id="form-change-permissions"
+                action=`${prefixAdmin}/roles/permissions?_method=PATCH`,
+                method="post"
+                class="d-none"
+            ) 
+                div(class="form-group")
+                    input(type="text" class="form-control d-none" name="permissions")
+        else
+            h1(class="mb-4") Phân quyền
+            
+            if(permissions)
+                div(data-permissions=permissions)
+                div(class="text-right")
+                    button(
+                        type="submit"
+                        class="btn btn-primary d-none"
+                        button-submit
+                    ) cập nhật 
+                table(
+                    class="table table-hover table-sm"
+                    table-permissions
+                )
+                    thead
+                        tr 
+                            th tính năng 
+                            each item in permissions
+                                th(class="text-center") #{item.title}
+                            //- th(class="text-center") quản trị viên 
+                    tbody 
+                        
+                        tr(data-name="id")
+                            each item in permissions
+                                td(class="text-center d-none")
+                                    input(type="text" value=item.id )
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b danh mục sản phẩm
+                        tr(data-name="products-category-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="products-category-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="products-category-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="products-category-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled)
+
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b nhóm quyền
+                        tr(data-name="roles-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled)
+                        
+                        tr 
+                            td(colspan="4")
+                                h6 
+                                    b Danh sách tài khoản
+                        tr(data-name="accounts-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="accounts-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="accounts-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="accounts-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled)
+                        
+                        tr 
+                            td(colspan="4") 
+                                h6 
+                                    b phân quyền
+                        tr(data-name="roles-permissions-view")
+                            td xem
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-permissions-create")
+                            td thêm mới
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-permissions-edit")
+                            td chỉnh sửa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled) 
+                        tr(data-name="roles-permissions-delete")
+                            td xóa
+                            each item in permissions
+                                td(class="text-center")
+                                    input(type="checkbox" disabled)
+
+            form(
+                id="form-change-permissions"
+                action=`${prefixAdmin}/roles/permissions?_method=PATCH`,
+                method="post"
+                class="d-none"
+            ) 
+                div(class="form-group")
+                    input(type="text" class="form-control d-none" name="permissions")
+        script(src="/admin/js/role.js") 

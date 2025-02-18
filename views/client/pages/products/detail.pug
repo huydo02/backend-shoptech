@@ -1,0 +1,28 @@
+extends ../../layouts/default.pug
+block main
+    h1 trang chi tiết sản phẩm
+        div(class="card d-flex" style="width:400px")
+            img(class="card-img-top" src=product.thumbnail alt="Card image" style="width:100%")
+            div(class="card-body")
+                h4(class="card-title") #{product.title}
+                p(class="card-text") #{product.description}
+                p(class="card-text text-danger") #{product.priceNew}$
+
+                a(href=`/products/detail/${product.slug}` class="btn btn-primary")  #{product.title}
+
+                form(
+                    action=`/cart/add/${product.id}`
+                    method="post"
+                )
+                    input(
+                        type="number"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        max=product.stock
+                    )
+                    button(
+                        type="submit"
+                        class="btn btn-success btn-block"
+                    ) thêm vào giỏ hàng
+            

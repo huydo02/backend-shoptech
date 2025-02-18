@@ -1,0 +1,28 @@
+.sider 
+    div(class="inner-menu"
+    style="display:flex; justify-content:space-between")
+        ul  
+            li
+                a(href=`${prefixAdmin}/dashboard`) dashboard 
+
+            li 
+                a(href=`${prefixAdmin}/list-product`) san pham 
+
+            if(role.permissions.includes("products-category-view"))  
+                li
+                    a(href=`${prefixAdmin}/list-category`) danh mục sản phẩm 
+
+            if(role.permissions.includes("roles-view"))  
+                li 
+                    a(href=`${prefixAdmin}/roles`) nhóm quyền
+            if(role.permissions.includes("roles-permissions-view"))
+                li 
+                    a(href=`${prefixAdmin}/roles/permissions`) phân quyền
+
+            if(role.permissions.includes("accounts-view"))  
+                li 
+                    a(href=`${prefixAdmin}/accounts`) danh sach tai khoan
+            li 
+                    a(href=`${prefixAdmin}/settings/general`) cài đặt 
+
+        //- a(href=`${prefixAdmin} /dashboard`) dashboard 

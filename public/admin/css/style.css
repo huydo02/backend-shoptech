@@ -1,0 +1,11 @@
+[show-alert].alert-hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.img-preview[src=""] {
+    display: none;
+}

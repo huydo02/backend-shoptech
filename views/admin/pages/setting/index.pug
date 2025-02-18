@@ -1,0 +1,92 @@
+extend ../../layouts/default.pug
+block main
+    h1 trang cai dat chung
+
+    form(
+        action=`${prefixAdmin}/settings/general?_method='patch`,
+        method="post"
+        id="form-create-product"
+        enctype="multipart/form-data",
+        style="padding:10px"
+        
+        )
+            div(class="form-group") 
+                label(for="websiteName") tên website
+                input(
+                    type="text"
+                    class="form-control"
+                    id="websiteName"
+                    name="websiteName"
+                    value=(settingsGeneral.websiteName ? settingsGeneral.websiteName : "")
+                )
+            div(
+                class="form-group"
+                upload-img
+                )
+                label(for="thumbnail") logo
+                input(
+                    type="file"
+                    class="form-control-file"
+                    id="thumbnail"
+                    name="thumbnail"
+                    accept="image/*"
+                    upload-img-input
+
+                )
+                img(
+                    class="img-preview"
+                    src=(settingsGeneral.thumbnail ? settingsGeneral.thumbnail : "") 
+                    alt="",
+                    style="width:120px;height:120px"
+                    upload-img-preview
+                     )
+             
+            div(class="form-group")
+                label(for="phone") số điện thoại
+                input(
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    value=(settingsGeneral.phone ? settingsGeneral.phone : "")
+
+                )
+            div(class="form-group")
+                label(for="email") email
+                input(
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value=(settingsGeneral.email ? settingsGeneral.email : "")
+
+                )
+            div(class="form-group")
+                label(for="address") địa chỉ
+                input(
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    value=(settingsGeneral.address ? settingsGeneral.address : "")
+
+                )
+            
+            div(class="form-group")
+                label(for="coppyright") coppyright
+                input(
+                    type="text"
+                    class="form-control"
+                    id="coppyright"
+                    name="coppyright"
+                    value=(settingsGeneral.coppyright ? settingsGeneral.coppyright : "")
+                
+                )
+            
+            div(class="form-group")
+                button(
+                    class="btn btn-primary"
+                    type="submit"
+                ) tạo mới
+
+    script(src="/admin/js/product.js") 

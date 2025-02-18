@@ -1,0 +1,101 @@
+extend ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/select.pug
+block main
+    +alert-error(5000)
+
+    h1(class="mb-4") Chỉnh sửa danh mục
+    h2 #{value.parent_id} abc
+    form(
+        action=`${prefixAdmin}/list-category/edit/${value.id}?_method=PATCH`,
+        method="post"
+        id="form-create-category"
+        enctype="multipart/form-data",
+        style="padding:10px"
+        
+        )
+            div(class="form-group")  
+                label(for="title") tiêu đề
+                input(
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    value=value.title
+                )
+            select(
+                id="parent_id"
+                name="parent_id"
+                class="form-control"
+            ) 
+                option(value="") -- chọn danh mục cha -- 
+                     +select-tree(categories, 1, value.parent_id)
+            div(class="form-group")
+                label(for="desc") mô tả
+                textarea(
+                    id="desc"
+                    class="form-control tiny-mce"
+                    name="description"
+                    
+                ) !{value.description}
+           
+            div(
+                class="form-group"
+                upload-img
+                )
+                label(for="thumbnail") ảnh
+                input(
+                    type="file"
+                    class="form-control-file"
+                    id="thumbnail"
+                    name="thumbnail"
+                    accept="image/*"
+                    upload-img-input
+
+                )
+                img(
+                    class="img-preview"
+                    src=value.thumbnail
+                    alt="",
+                    style="width:120px;height:120px"
+                    upload-img-preview
+                     )
+            div(class="form-group")
+                label(for="position") vị trí
+                input(
+                    type="number"
+                    class="form-control"
+                    id="position"
+                    name="position"
+                    placeholder="tự động điền"
+                    min="1"
+                    value=value.position
+                )
+            div(class="form-group form-check form-check-inline")
+                input(
+                    type="radio"
+                    class="form-check-input"
+                    id="statusActive"
+                    name="status"
+                    value="active"
+                    checked=(value.status == "active" ?  true : false)
+                     
+                )
+                label(for="statusActive" class="form-check-label") hoạt động 
+            div(class="form-group form-check form-check-inline")
+                input(
+                    type="radio"
+                    class="form-check-input"
+                    id="statusInActive"
+                    name="status"
+                    value="inactive"
+                    checked=(value.status == "inactive" ?  true : false)
+                )
+                label(for="statusInActive" class="form-check-label") dừng hoạt động 
+            div(class="form-group")
+                button(
+                    class="btn btn-primary"
+                    type="submit"
+                ) tạo mới
+
+    script(src="/admin/js/product.js") 

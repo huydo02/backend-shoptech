@@ -1,0 +1,52 @@
+extend ../../layouts/default.pug
+include ../../mixins/tableCategory.pug
+
+block main
+    h1 ddaay laf trang category
+
+    .card.mb-3
+        .card-header danh sach
+            .card-body
+                .row
+                    .col-8
+                     
+                    .col-4 
+                        a(
+                            href=`${prefixAdmin}/list-category/create`
+                            class="btn btn-outline-success"
+                        ) + thêm mới
+                table(class="table table-hover table-sm", checkbox-multiple) 
+                    thead
+                        tr 
+                            th 
+                                input(type="checkbox", name="checkall")
+                            th STT 
+                            //- th Hinh anh
+                            th tieu de
+                            //- th Danh mục cha
+                            th vi tri
+                            th trang thai
+                            th hanh dong
+                    tbody 
+                        +table-tree(categories)
+
+    nav
+        ul(class="pagination")
+                if (paginations.currentPage > 1)
+                    li(class="page-item")
+                        button(
+                            class="page-link"
+                            button-pagination=paginations.currentPage - 1
+                            ) trang trước
+                -for (var i = 1; i <= paginations.totalPages; i++)
+                    li(class=`page-item ${paginations.currentPage == i ? "active" : ""}`)
+                        button(
+                            class="page-link"
+                            button-pagination=i
+                            ) #{i}
+                if (paginations.currentPage < paginations.totalPages)
+                    li(class="page-item")
+                        button(
+                            class="page-link"
+                            button-pagination=paginations.currentPage + 1
+                            ) trang kế
