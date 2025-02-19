@@ -193,8 +193,9 @@ module.exports.quanTityCart = async (req, res) => {
         const totalQuantity = 0;
         res.status(201).cookie("cartId", cart.id, {
             expires: new Date(Date.now() + expiresCookie),
-            httpOnly: false,
-            // sameSite: "lax",
+            httpOnly: false, // nếu bạn muốn truy cập bằng JS
+            secure: true,
+            sameSite: "None",
         }).json({
             status: 200,
             cart: totalQuantity
