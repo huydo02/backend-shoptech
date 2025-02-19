@@ -42,7 +42,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use(cors({
-    origin: 'https://frontend-shoptech-peach.vercel.app', // React frontend URL
+    origin: 'https://frontend-shoptech-theta.vercel.app', // React frontend URL
     credentials: true,
 }));
 app.use(bodyParser.json());
