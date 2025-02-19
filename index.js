@@ -42,7 +42,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use(cors({
-    origin: 'http://localhost:3000', // React frontend URL
+    origin: 'https://frontend-shoptech-x4z8.vercel.app', // React frontend URL
     credentials: true,
 }));
 app.use(bodyParser.json());
