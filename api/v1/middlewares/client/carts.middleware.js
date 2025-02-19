@@ -18,7 +18,7 @@ module.exports.carts = async (req, res, next) => {
             expires: new Date(Date.now() + expiresCookie),
             httpOnly: false, // nếu bạn muốn truy cập bằng JS
             secure: true,
-            sameSite: "None",,
+            sameSite: "None",
         });
     } else {
         const cart = await CartsModel.findOne({
