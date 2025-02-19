@@ -36,11 +36,11 @@ module.exports.addPost = async (req, res) => {
     const cartId = req.body.cartId;
 
     const cart = await CartModel.findOne({ _id: cartId });
-
-    //check san pham co ton tai trong gio hang thuoc cart id tren ko
-    const existProductIdInCart = cart.products.find(item => item.product_id == productId);
     const product = await ProductModel.findOne({ _id: productId });
     console.log(product.stock)
+    //check san pham co ton tai trong gio hang thuoc cart id tren ko
+    // const existProductIdInCart = cart.products.find(item => item.product_id == productId);
+    const existProductIdInCart = cart.products?.find(item => item.product_id == productId);
 
     if (existProductIdInCart) {
         const newQuantity = parseInt(quantity) + existProductIdInCart.quantity;
