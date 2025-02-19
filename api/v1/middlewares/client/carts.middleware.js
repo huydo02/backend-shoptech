@@ -16,8 +16,9 @@ module.exports.carts = async (req, res, next) => {
 
         res.cookie("cartId", cart.id, {
             expires: new Date(Date.now() + expiresCookie),
-            httpOnly: false,
-            // sameSite: "lax",
+            httpOnly: false, // nếu bạn muốn truy cập bằng JS
+            secure: true,
+            sameSite: "None",,
         });
     } else {
         const cart = await CartsModel.findOne({
