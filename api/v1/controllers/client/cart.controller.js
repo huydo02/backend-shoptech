@@ -194,7 +194,7 @@ module.exports.quanTityCart = async (req, res) => {
         res.status(201).cookie("cartId", cart.id, {
             expires: new Date(Date.now() + expiresCookie),
             httpOnly: true, // nếu bạn muốn truy cập bằng JS
-            domain: "https://frontend-shoptech-theta.vercel.app",
+            // domain: "https://frontend-shoptech-theta.vercel.app",
             secure: true,
             sameSite: "None",
         }).json({
